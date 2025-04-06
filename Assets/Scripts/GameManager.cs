@@ -21,4 +21,14 @@ public class GameManager : MonoBehaviour
         _input.Player.Disable();
     }
 
+    public void EnableDrone()
+    {
+        _input.Drone.Enable();
+    }
+
+    public void DisableDrone()
+    {
+        _input.Drone.Disable();
+    }
+
 }

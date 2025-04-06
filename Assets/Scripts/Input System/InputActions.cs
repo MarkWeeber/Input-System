@@ -154,6 +154,182 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Drone"",
+            ""id"": ""d72963fb-caa1-4a22-9c72-b8ea65b36898"",
+            ""actions"": [
+                {
+                    ""name"": ""Tilt"",
+                    ""type"": ""Value"",
+                    ""id"": ""0df686ec-aab3-4e38-942a-b820acf3db50"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Vertical"",
+                    ""type"": ""Value"",
+                    ""id"": ""7feb0259-e3b2-42e2-abc0-472764ef48f6"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Steer"",
+                    ""type"": ""Value"",
+                    ""id"": ""aa209dfa-5f9c-42b4-bd37-496038ad80cd"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Return"",
+                    ""type"": ""Button"",
+                    ""id"": ""cf70b54f-2b3a-4be5-8498-0f4a832f5972"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""f4d32a84-4b0c-4307-8760-ca175134fe16"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tilt"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""c2b79a62-49f1-470f-921a-88f3b5a5c10b"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tilt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""fd2d4c6d-d51f-4353-aa06-f319e21d9ad1"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tilt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""dc5a8bac-6f3a-4ead-b697-aad4c28a152f"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tilt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""83305393-649b-473d-923e-5d21f0658d1a"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tilt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""2b78e19c-d821-4e24-bde9-9ace89f66238"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": ""Invert"",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""fdaf7d37-a10c-454a-875f-db55771ccc41"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""3eda8945-f103-4320-bde2-33b1081170df"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""9f401b6e-a364-4bc3-b53d-60455b6d1128"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Vertical"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""23eeac70-9788-47ea-af87-fd42cfca9758"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Vertical"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""3714e67d-eeb3-47f3-b16e-37db3ab4bb96"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Vertical"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""57bc2bae-b16b-43df-a431-4e147ab108c1"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Return"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -164,6 +340,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Space = m_Player.FindAction("Space", throwIfNotFound: true);
         m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
+        // Drone
+        m_Drone = asset.FindActionMap("Drone", throwIfNotFound: true);
+        m_Drone_Tilt = m_Drone.FindAction("Tilt", throwIfNotFound: true);
+        m_Drone_Vertical = m_Drone.FindAction("Vertical", throwIfNotFound: true);
+        m_Drone_Steer = m_Drone.FindAction("Steer", throwIfNotFound: true);
+        m_Drone_Return = m_Drone.FindAction("Return", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -276,11 +458,75 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Drone
+    private readonly InputActionMap m_Drone;
+    private IDroneActions m_DroneActionsCallbackInterface;
+    private readonly InputAction m_Drone_Tilt;
+    private readonly InputAction m_Drone_Vertical;
+    private readonly InputAction m_Drone_Steer;
+    private readonly InputAction m_Drone_Return;
+    public struct DroneActions
+    {
+        private @InputActions m_Wrapper;
+        public DroneActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Tilt => m_Wrapper.m_Drone_Tilt;
+        public InputAction @Vertical => m_Wrapper.m_Drone_Vertical;
+        public InputAction @Steer => m_Wrapper.m_Drone_Steer;
+        public InputAction @Return => m_Wrapper.m_Drone_Return;
+        public InputActionMap Get() { return m_Wrapper.m_Drone; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DroneActions set) { return set.Get(); }
+        public void SetCallbacks(IDroneActions instance)
+        {
+            if (m_Wrapper.m_DroneActionsCallbackInterface != null)
+            {
+                @Tilt.started -= m_Wrapper.m_DroneActionsCallbackInterface.OnTilt;
+                @Tilt.performed -= m_Wrapper.m_DroneActionsCallbackInterface.OnTilt;
+                @Tilt.canceled -= m_Wrapper.m_DroneActionsCallbackInterface.OnTilt;
+                @Vertical.started -= m_Wrapper.m_DroneActionsCallbackInterface.OnVertical;
+                @Vertical.performed -= m_Wrapper.m_DroneActionsCallbackInterface.OnVertical;
+                @Vertical.canceled -= m_Wrapper.m_DroneActionsCallbackInterface.OnVertical;
+                @Steer.started -= m_Wrapper.m_DroneActionsCallbackInterface.OnSteer;
+                @Steer.performed -= m_Wrapper.m_DroneActionsCallbackInterface.OnSteer;
+                @Steer.canceled -= m_Wrapper.m_DroneActionsCallbackInterface.OnSteer;
+                @Return.started -= m_Wrapper.m_DroneActionsCallbackInterface.OnReturn;
+                @Return.performed -= m_Wrapper.m_DroneActionsCallbackInterface.OnReturn;
+                @Return.canceled -= m_Wrapper.m_DroneActionsCallbackInterface.OnReturn;
+            }
+            m_Wrapper.m_DroneActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Tilt.started += instance.OnTilt;
+                @Tilt.performed += instance.OnTilt;
+                @Tilt.canceled += instance.OnTilt;
+                @Vertical.started += instance.OnVertical;
+                @Vertical.performed += instance.OnVertical;
+                @Vertical.canceled += instance.OnVertical;
+                @Steer.started += instance.OnSteer;
+                @Steer.performed += instance.OnSteer;
+                @Steer.canceled += instance.OnSteer;
+                @Return.started += instance.OnReturn;
+                @Return.performed += instance.OnReturn;
+                @Return.canceled += instance.OnReturn;
+            }
+        }
+    }
+    public DroneActions @Drone => new DroneActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnSpace(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
+    }
+    public interface IDroneActions
+    {
+        void OnTilt(InputAction.CallbackContext context);
+        void OnVertical(InputAction.CallbackContext context);
+        void OnSteer(InputAction.CallbackContext context);
+        void OnReturn(InputAction.CallbackContext context);
     }
 }
