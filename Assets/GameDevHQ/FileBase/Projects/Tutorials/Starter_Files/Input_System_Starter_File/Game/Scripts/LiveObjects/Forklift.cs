@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 namespace Game.Scripts.LiveObjects
 {
@@ -23,9 +24,19 @@ namespace Game.Scripts.LiveObjects
         public static event Action onDriveModeEntered;
         public static event Action onDriveModeExited;
 
+        private InputActions _input;
+        private GameManager _gameManager;
+        private Vector2 _moveInput;
+        private float _liftInput;
+
         private void OnEnable()
         {
             InteractableZone.onZoneInteractionComplete += EnterDriveMode;
+        }
+
+        private void Start()
+        {
+            InitializeInputs();
         }
 
         private void EnterDriveMode(InteractableZone zone)
@@ -34,6 +45,7 @@ namespace Game.Scripts.LiveObjects
             {
                 _inDriveMode = true;
                 _forkliftCam.Priority = 11;
+                _gameManager.EnableForklift();
                 onDriveModeEntered?.Invoke();
                 _driverModel.SetActive(true);
                 _interactableZone.CompleteTask(5);
@@ -45,6 +57,7 @@ namespace Game.Scripts.LiveObjects
             _inDriveMode = false;
             _forkliftCam.Priority = 9;            
             _driverModel.SetActive(false);
+            _gameManager.EnablePlayer();
             onDriveModeExited?.Invoke();
             
         }
@@ -55,16 +68,15 @@ namespace Game.Scripts.LiveObjects
             {
                 LiftControls();
                 CalcutateMovement();
-                if (Input.GetKeyDown(KeyCode.Escape))
-                    ExitDriveMode();
             }
 
         }
 
         private void CalcutateMovement()
         {
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
+            _moveInput = _input.Forklift.Movement.ReadValue<Vector2>();
+            float h = _moveInput.x;
+            float v = _moveInput.y;
             var direction = new Vector3(0, 0, v);
             var velocity = direction * _speed;
 
@@ -80,9 +92,10 @@ namespace Game.Scripts.LiveObjects
 
         private void LiftControls()
         {
-            if (Input.GetKey(KeyCode.R))
+            _liftInput = _input.Forklift.Lift.ReadValue<float>();
+            if (_liftInput > 0.01f)
                 LiftUpRoutine();
-            else if (Input.GetKey(KeyCode.T))
+            else if (_liftInput < -0.01f)
                 LiftDownRoutine();
         }
 
@@ -113,6 +126,18 @@ namespace Game.Scripts.LiveObjects
         private void OnDisable()
         {
             InteractableZone.onZoneInteractionComplete -= EnterDriveMode;
+        }
+
+        private void InitializeInputs()
+        {
+            _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+            _input = _gameManager.Input;
+            _input.Forklift.Return.performed += ReturnPerformed;
+        }
+
+        private void ReturnPerformed(InputAction.CallbackContext context)
+        {
+            ExitDriveMode();
         }
 
     }

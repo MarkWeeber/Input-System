@@ -37,8 +37,12 @@ namespace Game.Scripts.LiveObjects
 
         private void OnEnable()
         {
-            InitializeInputs();
             InteractableZone.onZoneInteractionComplete += EnterFlightMode;
+        }
+
+        private void Start()
+        {
+            InitializeInputs();
         }
 
         private void EnterFlightMode(InteractableZone zone)
@@ -49,7 +53,6 @@ namespace Game.Scripts.LiveObjects
                 _droneCam.Priority = 11;
                 _inFlightMode = true;
                 _gameManager.EnableDrone();
-                _gameManager.DisablePlayer();
                 OnEnterFlightMode?.Invoke();
                 UIManager.Instance.DroneView(true);
                 _interactableZone.CompleteTask(4);
@@ -61,7 +64,6 @@ namespace Game.Scripts.LiveObjects
             _droneCam.Priority = 9;
             _inFlightMode = false;
             UIManager.Instance.DroneView(false);
-            _gameManager.DisableDrone();
             _gameManager.EnablePlayer();
         }
 

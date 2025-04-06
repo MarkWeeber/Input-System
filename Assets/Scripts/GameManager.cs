@@ -14,21 +14,21 @@ public class GameManager : MonoBehaviour
     public void EnablePlayer()
     {
         _input.Player.Enable();
-    }
-
-    public void DisablePlayer()
-    {
-        _input.Player.Disable();
+        _input.Drone.Disable();
+        _input.Forklift.Disable();
     }
 
     public void EnableDrone()
     {
         _input.Drone.Enable();
+        _input.Player.Disable();
+        _input.Forklift.Disable();
     }
 
-    public void DisableDrone()
+    public void EnableForklift()
     {
+        _input.Forklift.Enable();
         _input.Drone.Disable();
+        _input.Player.Disable();
     }
-
 }
