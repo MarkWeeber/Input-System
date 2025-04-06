@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 using Game.Scripts.LiveObjects;
 using Cinemachine;
 
@@ -22,6 +21,9 @@ namespace Game.Scripts.Player
         [SerializeField]
         private GameObject _model;
 
+        private InputActions _input;
+        private GameManager _gameManager;
+        private Vector2 _movementInput;
 
         private void OnEnable()
         {
@@ -37,6 +39,7 @@ namespace Game.Scripts.Player
 
         private void Start()
         {
+            InitializeInputs();
             _controller = GetComponent<CharacterController>();
 
             if (_controller == null)
@@ -58,8 +61,9 @@ namespace Game.Scripts.Player
         private void CalcutateMovement()
         {
             _playerGrounded = _controller.isGrounded;
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
+            _movementInput = _input.Player.Movement.ReadValue<Vector2>();
+            float h = _movementInput.x;
+            float v = _movementInput.y;
 
             transform.Rotate(transform.up, h);
 
@@ -127,6 +131,13 @@ namespace Game.Scripts.Player
             Forklift.onDriveModeEntered -= HidePlayer;
             Drone.OnEnterFlightMode -= ReleasePlayerControl;
             Drone.onExitFlightmode -= ReturnPlayerControl;
+        }
+
+        private void InitializeInputs()
+        {
+            _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+            _input = _gameManager.Input;
+            _input.Player.Enable();
         }
 
     }
