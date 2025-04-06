@@ -137,7 +137,6 @@ namespace Game.Scripts.Player
         {
             _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
             _input = _gameManager.Input;
-            _input.Player.Enable();
         }
 
     }

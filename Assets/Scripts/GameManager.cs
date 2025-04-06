@@ -8,5 +8,17 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _input = new InputActions();
+        _input.Enable();
     }
+
+    public void EnablePlayer()
+    {
+        _input.Player.Enable();
+    }
+
+    public void DisablePlayer()
+    {
+        _input.Player.Disable();
+    }
+
 }

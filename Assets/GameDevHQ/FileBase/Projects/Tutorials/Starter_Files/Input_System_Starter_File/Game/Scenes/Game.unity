@@ -3232,6 +3232,8 @@ MonoBehaviour:
   _displayMessage: Break the Crate
   _zoneItems: []
   _inventoryIcon: {fileID: 21300000, guid: 88841726d7ebbfc46bf799ee1bfb7d3f, type: 3}
+  _inputActionAsset: {fileID: -3066497982775042010, guid: ed09837482b002b45a5398267ca96445,
+    type: 3}
   _zoneKeyInput: 101
   _keyState: 0
   _marker: {fileID: 1808342870}
@@ -8604,6 +8606,8 @@ MonoBehaviour:
   _zoneItems:
   - {fileID: 758722189}
   _inventoryIcon: {fileID: 21300000, guid: 8e46bcb2f14d4d144b9e4a395b47efa2, type: 3}
+  _inputActionAsset: {fileID: -3066497982775042010, guid: ed09837482b002b45a5398267ca96445,
+    type: 3}
   _zoneKeyInput: 101
   _keyState: 0
   _marker: {fileID: 605505802}
@@ -10721,6 +10725,8 @@ MonoBehaviour:
   _displayMessage: Denotate C4
   _zoneItems: []
   _inventoryIcon: {fileID: 21300000, guid: 88841726d7ebbfc46bf799ee1bfb7d3f, type: 3}
+  _inputActionAsset: {fileID: 9112605994555441951, guid: ed09837482b002b45a5398267ca96445,
+    type: 3}
   _zoneKeyInput: 32
   _keyState: 0
   _marker: {fileID: 1331263896}
@@ -18105,6 +18111,8 @@ MonoBehaviour:
   _displayMessage: Reset
   _zoneItems: []
   _inventoryIcon: {fileID: 0}
+  _inputActionAsset: {fileID: -3066497982775042010, guid: ed09837482b002b45a5398267ca96445,
+    type: 3}
   _zoneKeyInput: 101
   _keyState: 0
   _marker: {fileID: 1578479318}
@@ -18233,7 +18241,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972744894}
-  m_LocalRotation: {x: 0.22150686, y: 0.046705753, z: -0.010622011, w: 0.9739818}
+  m_LocalRotation: {x: 0.22150685, y: 0.046705756, z: -0.01062201, w: 0.9739818}
   m_LocalPosition: {x: -0.48177326, y: 4.5286655, z: -4.833789}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -25079,6 +25087,8 @@ MonoBehaviour:
   - {fileID: 474256985}
   - {fileID: 908574055}
   _inventoryIcon: {fileID: 21300000, guid: 81dff3a1ca824714aae965897edd2351, type: 3}
+  _inputActionAsset: {fileID: -3066497982775042010, guid: ed09837482b002b45a5398267ca96445,
+    type: 3}
   _zoneKeyInput: 101
   _keyState: 0
   _marker: {fileID: 1583429342}
@@ -25589,6 +25599,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1217445992}
+  - component: {fileID: 1217445993}
+  - component: {fileID: 1217445994}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -25610,6 +25622,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1217445993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217445991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34969d756d5e84d4cb8fae273246c525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1217445994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217445991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ed09837482b002b45a5398267ca96445,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &1218273865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26412,6 +26467,8 @@ MonoBehaviour:
   _displayMessage: Drive Forklift
   _zoneItems: []
   _inventoryIcon: {fileID: 21300000, guid: 88841726d7ebbfc46bf799ee1bfb7d3f, type: 3}
+  _inputActionAsset: {fileID: -3066497982775042010, guid: ed09837482b002b45a5398267ca96445,
+    type: 3}
   _zoneKeyInput: 101
   _keyState: 0
   _marker: {fileID: 1840441541}
@@ -35844,6 +35901,8 @@ MonoBehaviour:
   _displayMessage: Fly Drone
   _zoneItems: []
   _inventoryIcon: {fileID: 0}
+  _inputActionAsset: {fileID: -3066497982775042010, guid: ed09837482b002b45a5398267ca96445,
+    type: 3}
   _zoneKeyInput: 101
   _keyState: 0
   _marker: {fileID: 1041737524}
@@ -35969,11 +36028,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c14085171003ee2478ef40ebd5fcbee8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.036
+      value: 7.605
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c14085171003ee2478ef40ebd5fcbee8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.558
+      value: -4.524
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c14085171003ee2478ef40ebd5fcbee8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -39590,6 +39649,8 @@ MonoBehaviour:
   _displayMessage: Hack Cameras
   _zoneItems: []
   _inventoryIcon: {fileID: 0}
+  _inputActionAsset: {fileID: -3066497982775042010, guid: ed09837482b002b45a5398267ca96445,
+    type: 3}
   _zoneKeyInput: 101
   _keyState: 1
   _marker: {fileID: 55150249}
