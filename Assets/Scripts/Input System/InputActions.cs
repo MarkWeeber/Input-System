@@ -62,6 +62,24 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MultitapInteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""53ba068b-5378-47d0-ad91-44b2f5d5daec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HoldInteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""3f65875e-b61b-47e2-a945-9ddba1c30907"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -150,6 +168,28 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c4723127-f190-4821-bbce-fcb6e670d0c7"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""MultiTap(tapDelay=0.5)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MultitapInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0683e571-72fd-4d57-a70c-e98ffcb136c2"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""Hold(duration=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HoldInteract"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -474,6 +514,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Space = m_Player.FindAction("Space", throwIfNotFound: true);
         m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
+        m_Player_MultitapInteract = m_Player.FindAction("MultitapInteract", throwIfNotFound: true);
+        m_Player_HoldInteract = m_Player.FindAction("HoldInteract", throwIfNotFound: true);
         // Drone
         m_Drone = asset.FindActionMap("Drone", throwIfNotFound: true);
         m_Drone_Tilt = m_Drone.FindAction("Tilt", throwIfNotFound: true);
@@ -548,6 +590,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Space;
     private readonly InputAction m_Player_Escape;
+    private readonly InputAction m_Player_MultitapInteract;
+    private readonly InputAction m_Player_HoldInteract;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -556,6 +600,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Space => m_Wrapper.m_Player_Space;
         public InputAction @Escape => m_Wrapper.m_Player_Escape;
+        public InputAction @MultitapInteract => m_Wrapper.m_Player_MultitapInteract;
+        public InputAction @HoldInteract => m_Wrapper.m_Player_HoldInteract;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -577,6 +623,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Escape.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
                 @Escape.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
                 @Escape.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
+                @MultitapInteract.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMultitapInteract;
+                @MultitapInteract.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMultitapInteract;
+                @MultitapInteract.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMultitapInteract;
+                @HoldInteract.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHoldInteract;
+                @HoldInteract.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHoldInteract;
+                @HoldInteract.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHoldInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -593,6 +645,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Escape.started += instance.OnEscape;
                 @Escape.performed += instance.OnEscape;
                 @Escape.canceled += instance.OnEscape;
+                @MultitapInteract.started += instance.OnMultitapInteract;
+                @MultitapInteract.performed += instance.OnMultitapInteract;
+                @MultitapInteract.canceled += instance.OnMultitapInteract;
+                @HoldInteract.started += instance.OnHoldInteract;
+                @HoldInteract.performed += instance.OnHoldInteract;
+                @HoldInteract.canceled += instance.OnHoldInteract;
             }
         }
     }
@@ -709,6 +767,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnSpace(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
+        void OnMultitapInteract(InputAction.CallbackContext context);
+        void OnHoldInteract(InputAction.CallbackContext context);
     }
     public interface IDroneActions
     {

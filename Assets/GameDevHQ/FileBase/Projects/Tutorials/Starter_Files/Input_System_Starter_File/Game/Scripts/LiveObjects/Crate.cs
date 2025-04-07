@@ -7,6 +7,7 @@ namespace Game.Scripts.LiveObjects
     public class Crate : MonoBehaviour
     {
         [SerializeField] private float _punchDelay;
+        [SerializeField] private int _strongPunchCrateDestructionNumber = 5;
         [SerializeField] private GameObject _wholeCrate, _brokenCrate;
         [SerializeField] private Rigidbody[] _pieces;
         [SerializeField] private BoxCollider _crateCollider;
@@ -17,12 +18,23 @@ namespace Game.Scripts.LiveObjects
 
         private void OnEnable()
         {
-            InteractableZone.onZoneInteractionComplete += InteractableZone_onZoneInteractionComplete;
+            InteractableZone.onZoneInteractionComplete += Interact;
+            InteractableZone.onZoneAlternateInteractionComplete += AlternateInteract;
         }
 
-        private void InteractableZone_onZoneInteractionComplete(InteractableZone zone)
+        private void Interact(InteractableZone zone)
         {
-            
+            InteractableZone_onZoneInteractionComplete(zone);
+        }
+
+        private void AlternateInteract(InteractableZone zone)
+        {
+            InteractableZone_onZoneInteractionComplete(zone, true);
+        }
+
+        private void InteractableZone_onZoneInteractionComplete(InteractableZone zone, bool alternate = false)
+        {
+           
             if (_isReadyToBreak == false && _brakeOff.Count >0)
             {
                 _wholeCrate.SetActive(false);
@@ -34,7 +46,14 @@ namespace Game.Scripts.LiveObjects
             {
                 if (_brakeOff.Count > 0)
                 {
-                    BreakPart();
+                    if (alternate)
+                    {
+                        StrongBreak();
+                    }
+                    else
+                    {
+                        BreakPart();
+                    }
                     StartCoroutine(PunchDelay());
                 }
                 else if(_brakeOff.Count == 0)
@@ -54,8 +73,16 @@ namespace Game.Scripts.LiveObjects
         }
 
 
+        private void StrongBreak()
+        {
+            int partsToBreak = Mathf.Min(_brakeOff.Count, _strongPunchCrateDestructionNumber);
+            for (int i = 0; i < partsToBreak; i++)
+            {
+                BreakPart();
+            }
+        }
 
-        public void BreakPart()
+        private void BreakPart()
         {
             int rng = Random.Range(0, _brakeOff.Count);
             _brakeOff[rng].constraints = RigidbodyConstraints.None;
@@ -77,7 +104,8 @@ namespace Game.Scripts.LiveObjects
 
         private void OnDisable()
         {
-            InteractableZone.onZoneInteractionComplete -= InteractableZone_onZoneInteractionComplete;
+            InteractableZone.onZoneInteractionComplete -= Interact;
+            InteractableZone.onZoneAlternateInteractionComplete -= AlternateInteract;
         }
     }
 }

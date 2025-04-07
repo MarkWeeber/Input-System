@@ -31,6 +31,8 @@ namespace Game.Scripts.LiveObjects
         [Tooltip("Press the (---) Key to .....")]
         private string _displayMessage;
         [SerializeField]
+        private string _customDisplayMessage;
+        [SerializeField]
         private GameObject[] _zoneItems;
         private bool _inZone = false;
         private bool _itemsCollected = false;
@@ -39,6 +41,8 @@ namespace Game.Scripts.LiveObjects
         private Sprite _inventoryIcon;
         [SerializeField]
         private InputActionReference _inputActionAsset;
+        [SerializeField]
+        private InputActionReference _alternateInputActionAsset;
         [SerializeField]
         private KeyCode _zoneKeyInput;
         [SerializeField]
@@ -64,6 +68,7 @@ namespace Game.Scripts.LiveObjects
 
 
         public static event Action<InteractableZone> onZoneInteractionComplete;
+        public static event Action<InteractableZone> onZoneAlternateInteractionComplete;
         public static event Action<int> onHoldStarted;
         public static event Action<int> onHoldEnded;
 
@@ -75,6 +80,7 @@ namespace Game.Scripts.LiveObjects
         private void OnEnable()
         {
             InteractableZone.onZoneInteractionComplete += SetMarker;
+            InteractableZone.onZoneAlternateInteractionComplete += SetMarker;
 
         }
 
@@ -123,10 +129,14 @@ namespace Game.Scripts.LiveObjects
                             UIManager.Instance.DisplayInteractableZoneMessage(true, $"Hold the {_zoneKeyInput.ToString()} key to perform action");
                         break;
                 }
+                if (_customDisplayMessage != string.Empty)
+                {
+                    UIManager.Instance.DisplayInteractableZoneMessage(true, _customDisplayMessage);
+                }
             }
         }
 
-        private void CollectItems()
+        private void CollectItems(bool alternate = false)
         {
             foreach (var item in _zoneItems)
             {
@@ -136,12 +146,17 @@ namespace Game.Scripts.LiveObjects
             UIManager.Instance.UpdateInventoryDisplay(_inventoryIcon);
 
             CompleteTask(_zoneID);
-
-            onZoneInteractionComplete?.Invoke(this);
-
+            if (alternate)
+            {
+                onZoneAlternateInteractionComplete?.Invoke(this);
+            }
+            else
+            {
+                onZoneInteractionComplete?.Invoke(this);
+            }
         }
 
-        private void PerformAction()
+        private void PerformAction(bool alternate = false)
         {
             foreach (var item in _zoneItems)
             {
@@ -151,7 +166,14 @@ namespace Game.Scripts.LiveObjects
             if (_inventoryIcon != null)
                 UIManager.Instance.UpdateInventoryDisplay(_inventoryIcon);
 
-            onZoneInteractionComplete?.Invoke(this);
+            if (alternate)
+            {
+                onZoneAlternateInteractionComplete?.Invoke(this);
+            }
+            else
+            {
+                onZoneInteractionComplete?.Invoke(this);
+            }
         }
 
         private void PerformHoldAction()
@@ -170,12 +192,19 @@ namespace Game.Scripts.LiveObjects
             return _zoneID;
         }
 
-        public void CompleteTask(int zoneID)
+        public void CompleteTask(int zoneID, bool alternate = false)
         {
             if (zoneID == _zoneID)
             {
                 _currentZoneID++;
-                onZoneInteractionComplete?.Invoke(this);
+                if (alternate)
+                {
+                    onZoneAlternateInteractionComplete?.Invoke(this);
+                }
+                else
+                {
+                    onZoneInteractionComplete?.Invoke(this);
+                }
             }
         }
 
@@ -205,12 +234,22 @@ namespace Game.Scripts.LiveObjects
         private void OnDisable()
         {
             InteractableZone.onZoneInteractionComplete -= SetMarker;
+            InteractableZone.onZoneAlternateInteractionComplete -= SetMarker;
         }
 
         private void AssignInput()
         {
             _inputActionAsset.action.performed += ActionPerformed;
             _inputActionAsset.action.canceled += ActionCancelled;
+            if (_alternateInputActionAsset != null)
+            {
+                _alternateInputActionAsset.action.performed += AlternateActionPerformed; ;
+            }
+        }
+
+        private void AlternateActionPerformed(InputAction.CallbackContext obj)
+        {
+            ActionPerformed(true);
         }
 
         private void ActionCancelled(InputAction.CallbackContext context)
@@ -227,6 +266,11 @@ namespace Game.Scripts.LiveObjects
 
         private void ActionPerformed(InputAction.CallbackContext context)
         {
+            ActionPerformed(false);
+        }
+
+        private void ActionPerformed(bool alternate = false)
+        {
             if (_inZone == true)
             {
                 if (_keyState != KeyState.PressHold)
@@ -237,7 +281,7 @@ namespace Game.Scripts.LiveObjects
                         case ZoneType.Collectable:
                             if (_itemsCollected == false)
                             {
-                                CollectItems();
+                                CollectItems(alternate);
                                 _itemsCollected = true;
                                 UIManager.Instance.DisplayInteractableZoneMessage(false);
                             }
@@ -246,7 +290,7 @@ namespace Game.Scripts.LiveObjects
                         case ZoneType.Action:
                             if (_actionPerformed == false)
                             {
-                                PerformAction();
+                                PerformAction(alternate);
                                 _actionPerformed = true;
                                 UIManager.Instance.DisplayInteractableZoneMessage(false);
                             }
@@ -263,8 +307,16 @@ namespace Game.Scripts.LiveObjects
                             break;
                     }
                 }
+            }
+        }
 
-
+        private void OnDestroy()
+        {
+            _inputActionAsset.action.performed -= ActionPerformed;
+            _inputActionAsset.action.canceled -= ActionCancelled;
+            if (_alternateInputActionAsset != null)
+            {
+                _alternateInputActionAsset.action.performed -= AlternateActionPerformed; ;
             }
         }
     }
